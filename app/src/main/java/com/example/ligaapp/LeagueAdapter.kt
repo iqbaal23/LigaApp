@@ -24,7 +24,7 @@ class LeagueAdapter(private val context: Context, private val leagueItems: List<
                     imageView{
                         id = R.id.league_image
                     }.lparams{
-                        height = dip(250)
+                        height = dip(200)
                         width = matchParent
                     }
 

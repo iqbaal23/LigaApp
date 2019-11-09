@@ -1,6 +1,5 @@
 package com.example.ligaapp
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -21,14 +20,7 @@ class MainActivity : AppCompatActivity() {
                 lparams(width = matchParent, height = matchParent)
                 layoutManager = GridLayoutManager(this@MainActivity, 2)
                 adapter = LeagueAdapter(this@MainActivity, leagueItems){
-                    val leagueItem = LeagueItem(
-                        it.leagueName,
-                        it.leagueDescription,
-                        it.leagueImage
-                    )
-                    val moveToDetail = Intent(this@MainActivity, LeagueDetailActivity::class.java)
-                    moveToDetail.putExtra(LeagueDetailActivity.EXTRA_LEAGUE, leagueItem)
-                    startActivity(moveToDetail)
+                    startActivity<LeagueDetailActivity>(LeagueDetailActivity.EXTRA_LEAGUE to it)
                 }
             }
         }
