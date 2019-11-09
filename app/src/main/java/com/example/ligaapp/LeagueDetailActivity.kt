@@ -2,22 +2,24 @@ package com.example.ligaapp
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
 import org.jetbrains.anko.*
 
 class LeagueDetailActivity : AppCompatActivity() {
-    private var name: String = ""
-    private var description: String = ""
-    private var image: Int = 0
+    companion object{
+        const val EXTRA_LEAGUE = "extra_league"
+    }
     lateinit var nameTextView: TextView
     lateinit var descriptionTextView: TextView
     lateinit var imageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val actionbar = supportActionBar
+
         scrollView {
             verticalLayout {
                 padding = dip(8)
@@ -37,14 +39,22 @@ class LeagueDetailActivity : AppCompatActivity() {
             }
         }
 
-        val intent = intent
-        name = intent.getStringExtra("name")
-        description = intent.getStringExtra("desc")
-        image = intent.getIntExtra("image", 0)
+        val league = intent.getParcelableExtra(EXTRA_LEAGUE) as LeagueItem
+        var name = league.leagueName.toString()
+        var description = league.leagueDescription.toString()
+        var image = league.leagueImage!!
+
+        actionbar!!.title = name
+        actionbar.setDisplayHomeAsUpEnabled(true)
 
         imageView.setImageResource(image)
         nameTextView.text = name
         descriptionTextView.text = description
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

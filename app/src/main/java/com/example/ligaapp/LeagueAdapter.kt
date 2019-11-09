@@ -2,6 +2,7 @@ package com.example.ligaapp
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -29,9 +30,10 @@ class LeagueAdapter(private val context: Context, private val leagueItems: List<
 
                     textView{
                         id = R.id.league_name
+                        this.gravity = Gravity.CENTER
                     }.lparams{
-                        width = matchParent
                         margin = dip(10)
+                        width = matchParent
                     }
                 }
             }
@@ -41,8 +43,6 @@ class LeagueAdapter(private val context: Context, private val leagueItems: List<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder{
         return LeagueViewHolder(LeagueUI().createView(AnkoContext.Companion.create(parent.context, parent)))
     }
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-//        LeagueViewHolder(LayoutInflater.from(context).inflate(R.layout.league_list, parent, false))
 
     override fun getItemCount(): Int = leagueItems.size
 

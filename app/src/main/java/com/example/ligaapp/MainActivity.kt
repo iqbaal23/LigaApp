@@ -1,11 +1,9 @@
 package com.example.ligaapp
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.view.View
-import android.widget.Toast
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -23,9 +21,14 @@ class MainActivity : AppCompatActivity() {
                 lparams(width = matchParent, height = matchParent)
                 layoutManager = GridLayoutManager(this@MainActivity, 2)
                 adapter = LeagueAdapter(this@MainActivity, leagueItems){
-//                    val toast = Toast.makeText(this@MainActivity, it.leagueName, Toast.LENGTH_SHORT)
-//                    toast.show()
-                    startActivity<LeagueDetailActivity>("name" to it.leagueName, "desc" to it.leagueDescription, "image" to it.leagueImage)
+                    val leagueItem = LeagueItem(
+                        it.leagueName,
+                        it.leagueDescription,
+                        it.leagueImage
+                    )
+                    val moveToDetail = Intent(this@MainActivity, LeagueDetailActivity::class.java)
+                    moveToDetail.putExtra(LeagueDetailActivity.EXTRA_LEAGUE, leagueItem)
+                    startActivity(moveToDetail)
                 }
             }
         }
